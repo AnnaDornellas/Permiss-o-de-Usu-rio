@@ -1,0 +1,39 @@
+<?php if ($_allows("view")): ?>
+    <h1>Minha lista de ocupações</h1>
+
+    <div>
+        <?php if ($_allows("add")): ?><a href="<?= $_refer("ocupacoes/add"); ?>">Novo registro</a><?php endif; ?> | <a href="<?= $_refer("logout"); ?>">Sair</a> |  <?php if ($_allows("adduser")): ?><a href="<?= $_refer("usuarios/add"); ?>">Usuários</a><?php endif; ?>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Data de Criação</th>
+            <th>Data de Atualização</th>
+            <th>Nome</th>
+            <th>Ocupação</th>
+            <th>Email</th>
+            <th>Permissão</th>
+            <th>Opções</th>
+        </tr>
+        <?php foreach ($occupations as $occupation): ?>
+            <tr>
+                <td><?= $occupation["id"]; ?></td>
+                <td><?= $occupation["created"]; ?></td>
+                <td><?= $occupation["updated"]; ?></td>
+                <td><?= $occupation["name"]; ?></td>
+                <td><?= $occupation["occupation"]; ?></td>
+                <td><?= $occupation["email"]; ?></td>
+                <td><?= $occupation["allow"]; ?></td>
+                <td>
+                    <?php if ($_allows("edit")): ?>
+                        <a href="<?= $_refer("ocupacoes/edit/" . $occupation["id"]); ?>">Atualizar</a>
+                    <?php endif; ?>
+                    <?php if ($_allows("delete")): ?>
+                        <a href="<?= $_refer("ocupacoes/delete/" . $occupation["id"]); ?>">Excluir</a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
