@@ -2,7 +2,7 @@
     <h1>Minha lista de ocupações</h1>
 
     <div>
-        <?php if ($_allows("add")): ?><a href="<?= $_refer("ocupacoes/add"); ?>">Novo registro</a><?php endif; ?> | <a href="<?= $_refer("logout"); ?>">Sair</a> |  <?php if ($_allows("adduser")): ?><a href="<?= $_refer("usuarios/add"); ?>">Usuários</a><?php endif; ?>
+        <?php if ($_allows("add")): ?><a href="<?= $_refer("ocupacoes/add"); ?>">Novo registro</a><?php endif; ?> | <a href="<?= $_refer("logout"); ?>">Sair</a> |  <?php if ($_allows("adduser")): ?><a href="<?= $_refer("usuarios/index"); ?>">Usuários</a><?php endif; ?>
     </div>
 
     <table>

@@ -1,0 +1,17 @@
+<h1>Editar o usuário</h1>
+<div>
+    <form action="<?= $_refer("usuarios/edit/". $id); ?>" method="post">
+        <label>Escreva seu Username</label><br>
+        <input type='text' name='username' required="true" placeholder="Escreva seu username" value="<?= $pessoa["username"]; ?>"><br>
+        <label>Escreva a seu Email</label><br>
+        <input type='text' name='email' required="true" placeholder="Escreva a sua email" value="<?= $pessoa["email"]; ?>"><br>
+        <label>Escreva o seu CPF</label><br>
+        <input type='text' name='cpf' required="true" placeholder="Escreva o seu email" value="<?= $pessoa["CPF"]; ?>"><br>
+        <label>Escreva sua Senha</label><br>
+        <input type='password' name="password" required="true" placeholder="Escreva sua senha" value="<?= $pessoa["password"]; ?>"><br>
+        <label>Escreva sua Permissão</label><br>
+        <input type='text' name="allow" required="true" placeholder="Escreva sua permissão" value="<?= $pessoa["allow"]; ?>"><br>
+        
+        <input type="submit" value="salvar">
+    </form>
+</div>

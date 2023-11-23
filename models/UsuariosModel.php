@@ -35,8 +35,8 @@ class UsuariosModel extends Model {
     }
 
     public function add($parametros) {
-        $occupations = Model::drive('users');
-        $occupations->insert($parametros)->execute();
+        $users = Model::drive('users');
+        $users->insert($parametros)->execute();
         return true;
     }
 

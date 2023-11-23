@@ -1,7 +1,7 @@
 <?php
 
 use System\Classes\Controller;
-use App\Model\OcupacoesModel;
+use App\Model\UsuariosModel;
 use System\Classes\Auth;
 
 class UsuariosController extends Controller {
@@ -16,10 +16,11 @@ class UsuariosController extends Controller {
 
     public function index($_args = []) {
         $auth = new Auth();
-
+        
         if ($auth->logged() && $auth->allows("view")) {
-            $OcupacoesModel = new OcupacoesModel();
-            $_args["users"] = $OcupacoesModel->select();
+            $UsuariosModel = new UsuariosModel();
+            $_args["users"] = $UsuariosModel->select();
+
         } else {
             $this->refer("logout");
         }
@@ -36,11 +37,13 @@ class UsuariosController extends Controller {
 
                 $parametros["username"] = $_POST["username"];
                 $parametros["email"] = $_POST["email"];
+                $parametros["cpf"] = $_POST["CPF"];
+                $parametros["password"] = $_POST["password"];
                 $parametros["allow"] = $_POST["allow"];
 
-                $OcupacoesModel = new OcupacoesModel();
+                $UsuariosModel = new UsuariosModel();
 
-                if ($OcupacoesModel->add($parametros)) {
+                if ($UsuariosModel->add($parametros)) {
                     $this->refer("usuarios");
                 }
             }
@@ -56,7 +59,7 @@ class UsuariosController extends Controller {
         $auth = new Auth();
         if ($auth->logged() && $auth->allows("delete")) {
             $where["id"] = $_args[0];
-            $OcupacoesModel = new OcupacoesModel();
+            $OcupacoesModel = new UsuariosModel();
             $OcupacoesModel->delete($where);
             $this->refer("usuarios");
         } else {
@@ -73,8 +76,8 @@ class UsuariosController extends Controller {
         if ($auth->logged() && $auth->allows("edit")) {
             $_args["id"] = $_args[0];
 
-            $OcupacoesModel = new OcupacoesModel();
-            $_args["pessoa"] = $OcupacoesModel->select($_args["id"]);
+            $UsuariosModel = new UsuariosModel();
+            $_args["pessoa"] = $UsuariosModel->select($_args["id"]);
 
             if (!$_args["pessoa"]) {
                 $this->refer("usuario");
@@ -82,15 +85,17 @@ class UsuariosController extends Controller {
 
             if ($_POST) {
 
-                $parametros["name"] = $_POST["name"];
-                $parametros["occupation"] = $_POST["occupation"];
+                $parametros["username"] = $_POST["username"];
                 $parametros["email"] = $_POST["email"];
+                $parametros["cpf"] = $_POST["CPF"];
+                $parametros["password"] = $_POST["password"];
                 $parametros["allow"] = $_POST["allow"];
+
 
                 $where["id"] = $_args["id"];
 
-                $OcupacoesModel->edit($parametros, $where);
-                $this->refer("ocupacoes");
+                $UsuariosModel->edit($parametros, $where);
+                $this->refer("usuarios");
             }
         } else {
             $this->refer("logout");
